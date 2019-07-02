@@ -48,6 +48,19 @@ componentDidMount() {
     this.setState({ fishOrder: fishOrderCopy });
   }
 
+  saveNewOrder = (orderName) => {
+    const newOrder = { fishes: { ...this.state.fishOrder }, name: orderName };
+    newOrder.dateTime = Date.now();
+    newOrder.uid = firebase.auth().currentUser.uid;
+    console.error('newOrder', newOrder);
+    ordersData.postOrder(newOrder)
+      .then(() => {
+        this.setState({ fishOrder: {} });
+        this.getOrders();
+      })
+      .catch(err => console.error('error in post order', err));
+  }
+
   render() {
     const { fishes, orders, fishOrder } = this.state;
     return (
@@ -60,7 +73,8 @@ componentDidMount() {
           <NewOrder
           fishes={fishes}
           fishOrder={fishOrder}
-          removeFromOrder ={this.removeFromOrder}/>
+          removeFromOrder ={this.removeFromOrder}
+          saveNewOrder={this.saveNewOrder}/>
           </div>
           <div className="col">
           <Orders orders={orders} deleteOrder={this.deleteOrder}/>
