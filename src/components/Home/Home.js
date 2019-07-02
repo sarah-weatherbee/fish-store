@@ -42,6 +42,12 @@ componentDidMount() {
     this.setState({ fishOrder: fishOrderCopy });
   }
 
+  removeFromOrder = (fishId) => {
+    const fishOrderCopy = { ...this.state.fishOrder };
+    delete fishOrderCopy[fishId]; // rem key val pair
+    this.setState({ fishOrder: fishOrderCopy });
+  }
+
   render() {
     const { fishes, orders, fishOrder } = this.state;
     return (
@@ -53,7 +59,8 @@ componentDidMount() {
           <div className="col">
           <NewOrder
           fishes={fishes}
-          fishOrder={fishOrder}/>
+          fishOrder={fishOrder}
+          removeFromOrder ={this.removeFromOrder}/>
           </div>
           <div className="col">
           <Orders orders={orders} deleteOrder={this.deleteOrder}/>
