@@ -114,7 +114,8 @@ componentDidMount() {
           orderEditing={orderEditing}/>
           </div>
           <div className="col">
-            <Orders orders={orders} deleteOrder={this.deleteOrder} selectOrderToEdit={this.selectOrderToEdit}/>
+            <Orders orders={orders} deleteOrder={this.deleteOrder}
+            selectOrderToEdit={this.selectOrderToEdit}/>
           </div>
         </div>
         </div>
